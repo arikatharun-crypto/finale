@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finale Dashboard</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; display: flex; height: 100vh; background: #f5f6fa; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px; background: #2c3e50; color: #fff; padding: 20px;
+      display: flex; flex-direction: column; gap: 15px;
+    }
+    .sidebar h2 { margin-bottom: 20px; text-align: center; }
+    .sidebar a {
+      color: #ecf0f1; text-decoration: none; padding: 10px; border-radius: 6px;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover { background: #34495e; }
+
+    /* Main Content */
+    .main {
+      flex: 1; padding: 20px;
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .header {
+      background: #fff; padding: 15px; border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .cards {
+      display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 20px;
+    }
+    .card {
+      background: #fff; padding: 20px; border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    canvas { width: 100% !important; height: 300px !important; }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Finale</h2>
+    <a href="#">🏠 Dashboard</a>
+    <a href="#">📊 Analytics</a>
+    <a href="#">⚙ Settings</a>
+    <a href="#">🚪 Logout</a>
+  </div>
+
+  <div class="main">
+    <div class="header">
+      <h1>Dashboard Overview</h1>
+      <button style="padding:8px 15px;border:none;border-radius:6px;background:#3498db;color:#fff;cursor:pointer;">
+        + Add Report
+      </button>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Total Users</h3>
+        <p style="font-size:24px;font-weight:bold;">1,245</p>
+      </div>
+      <div class="card">
+        <h3>Revenue</h3>
+        <p style="font-size:24px;font-weight:bold;">$12,340</p>
+      </div>
+      <div class="card">
+        <h3>Active Sessions</h3>
+        <p style="font-size:24px;font-weight:bold;">342</p>
+      </div>
+      <div class="card">
+        <h3>New Orders</h3>
+        <p style="font-size:24px;font-weight:bold;">76</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Performance Chart</h3>
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+        datasets: [{
+          label: 'Visitors',
+          data: [120, 190, 300, 250, 220, 320, 400],
+          borderColor: '#3498db',
+          backgroundColor: 'rgba(52,152,219,0.2)',
+          tension: 0.4,
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: true } },
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+  </script>
+</body>
+</html>
